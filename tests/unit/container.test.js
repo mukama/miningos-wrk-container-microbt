@@ -432,3 +432,84 @@ test('MicroBTContainer - setCoolingFanThreshold with empty thresholds', async (t
 
   t.ok(result.success)
 })
+
+test('MicroBTContainer - getSystemErrorInformation maps active bits to error names', async (t) => {
+  const sysErrBuf = Buffer.alloc(20)
+  sysErrBuf[0] = 0xc0 // bits 0 and 1 set
+  const client = {
+    ...mockClient,
+    read: () => Promise.resolve(sysErrBuf)
+  }
+
+  const container = new MicroBTContainer({
+    getClient: () => client,
+    address: getRandomIP(),
+    port: 502,
+    username: 'admin',
+    password
+  })
+
+  const errors = await container.getSystemErrorInformation()
+  t.is(errors.length, 2)
+  t.ok(errors.some((e) => e.name === 'low_inlet_pressure_circ_pump'))
+  t.ok(errors.some((e) => e.name === 'low_outlet_pressure_circ_pump'))
+})
+
+test('MicroBTContainer - getSystemErrorInformation returns empty when no bits set', async (t) => {
+  const client = {
+    ...mockClient,
+    read: () => Promise.resolve(Buffer.alloc(20))
+  }
+
+  const container = new MicroBTContainer({
+    getClient: () => client,
+    address: getRandomIP(),
+    port: 502,
+    username: 'admin',
+    password
+  })
+
+  const errors = await container.getSystemErrorInformation()
+  t.is(errors.length, 0)
+})
+
+test('MicroBTContainer - getGeneralErrorInformation maps active bits to error names', async (t) => {
+  const genBuf = Buffer.alloc(10)
+  genBuf[0] = 0xe0 // bits 0, 1, 2 set
+  const client = {
+    ...mockClient,
+    read: () => Promise.resolve(genBuf)
+  }
+
+  const container = new MicroBTContainer({
+    getClient: () => client,
+    address: getRandomIP(),
+    port: 502,
+    username: 'admin',
+    password
+  })
+
+  const errors = await container.getGeneralErrorInformation()
+  t.is(errors.length, 3)
+  t.ok(errors.some((e) => e.name === 'outdoor_ambient_temp_sensor_fault'))
+  t.ok(errors.some((e) => e.name === 'indoor_temp_humidity_sensor_fault'))
+  t.ok(errors.some((e) => e.name === 'makeup_water_pump_fault'))
+})
+
+test('MicroBTContainer - getGeneralErrorInformation returns empty when no bits set', async (t) => {
+  const client = {
+    ...mockClient,
+    read: () => Promise.resolve(Buffer.alloc(10))
+  }
+
+  const container = new MicroBTContainer({
+    getClient: () => client,
+    address: getRandomIP(),
+    port: 502,
+    username: 'admin',
+    password
+  })
+
+  const errors = await container.getGeneralErrorInformation()
+  t.is(errors.length, 0)
+})

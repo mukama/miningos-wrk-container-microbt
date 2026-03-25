@@ -165,7 +165,7 @@ class MicroBTContainer extends BaseContainer {
 
   async getGeneralErrorInformation () {
     const mappings = _DeviceMappings.GeneralError
-    const result = await this._readIdentifier('fcdu', 96, 5, false, true)
+    const result = await this._readHoldingRegisters('fcdu', 96, 5, false, true)
     return mappings(result)
   }
 
