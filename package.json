@@ -1,6 +1,6 @@
 {
   "name": "@tetherto/miningos-wrk-container-microbt",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "MiningOS Worker Container MicroBT",
   "keywords": [
     "tether"
