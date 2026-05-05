@@ -1,6 +1,6 @@
 'use strict'
 
-const { switchSocketExecutor } = require('miningos-tpl-wrk-container/tests/executors')
+const { switchSocketExecutor } = require('@tetherto/miningos-tpl-wrk-container/tests/executors')
 
 module.exports = (v) => {
   v.switchSocketOnBatch.stages[1].wait = 5000

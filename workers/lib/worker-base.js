@@ -1,6 +1,6 @@
 'use strict'
 
-const WrkRack = require('miningos-tpl-wrk-container/workers/rack.container.wrk')
+const WrkRack = require('@tetherto/miningos-tpl-wrk-container/workers/rack.container.wrk')
 const Container = require('./container.js')
 const async = require('async')
 

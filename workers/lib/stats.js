@@ -1,7 +1,7 @@
 'use strict'
 
-const libStats = require('miningos-tpl-wrk-container/workers/lib/stats')
-const { groupBy } = require('miningos-lib-stats/utils')
+const libStats = require('@tetherto/miningos-tpl-wrk-container/workers/lib/stats')
+const { groupBy } = require('@tetherto/miningos-lib-stats/utils')
 
 libStats.specs.container = {
   ...libStats.specs.container_default,
