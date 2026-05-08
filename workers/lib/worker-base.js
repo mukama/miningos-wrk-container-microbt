@@ -9,7 +9,7 @@ class WrkContainerRack extends WrkRack {
     super.init()
 
     this.setInitFacs([
-      ['fac', 'svc-facs-modbus', '0', '0', {}, 0]
+      ['fac', '@tetherto/svc-facs-modbus', '0', '0', {}, 0]
     ])
   }
 

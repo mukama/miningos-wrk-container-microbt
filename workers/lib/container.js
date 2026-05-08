@@ -2,7 +2,7 @@
 
 const BaseContainer = require('@tetherto/miningos-tpl-wrk-container/workers/lib/base')
 const { RUNNING_STATUS } = require('@tetherto/miningos-tpl-wrk-container/workers/lib/constants')
-const { FUNCTION_CODES, PROTOCOL } = require('svc-facs-modbus/lib/constants')
+const { FUNCTION_CODES, PROTOCOL } = require('@tetherto/svc-facs-modbus/lib/constants')
 const { mapSeries, series, reflectAll, retry } = require('async')
 const { bufferToInt16Array, bufferToBitString } = require('./utils')
 const { getAuthData } = require('./utils/auth')

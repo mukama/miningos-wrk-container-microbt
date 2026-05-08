@@ -3,7 +3,7 @@
 const { getDefaultConf, testExecutor } = require('@tetherto/miningos-tpl-wrk-container/tests/container.test')
 const Container = require('../workers/lib/container')
 const { promiseSleep: sleep } = require('@bitfinex/lib-js-util-promise')
-const ModbusFacility = require('svc-facs-modbus')
+const ModbusFacility = require('@tetherto/svc-facs-modbus')
 const crypto = require('crypto')
 
 let mock
