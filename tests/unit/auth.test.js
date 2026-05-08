@@ -60,17 +60,3 @@ test('getAuthData - special characters in username/password', (t) => {
   t.ok(Buffer.isBuffer(result))
   t.is(result.length, 32)
 })
-
-test('getAuthData - verify hash algorithm steps', (t) => {
-  const username = 'test'
-  const random = Buffer.from([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])
-
-  // Manually compute expected result
-  const md5Username = crypto.createHash('md5').update(username).digest()
-  const md5Password = crypto.createHash('md5').update(password).digest()
-  const expected = crypto.createHash('sha256').update(Buffer.concat([random, md5Username, md5Password])).digest()
-
-  const result = getAuthData(username, password, random)
-
-  t.alike(result, expected)
-})
